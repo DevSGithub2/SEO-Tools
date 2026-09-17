@@ -12,8 +12,14 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "FastSEOKit - High-Speed SEO Utilities",
-  description: "Free browser-based SEO utility suite built for creators and developers.",
+  title: {
+    default: "FastSEOkit",
+    template: "%s | FastSEOkit",
+  },
+  description: "High-speed, browser-based SEO utility suite and AI copilot.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
