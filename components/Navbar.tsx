@@ -1,22 +1,34 @@
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Logo from "@/components/Logo";
 
 export default function Navbar() {
+  const links = [
+    { href: "/tools/serp-preview", label: "SERP" },
+    { href: "/tools/social-preview", label: "Social Card" },
+    { href: "/tools/utm-builder", label: "UTM Builder" },
+    { href: "/tools/slug-generator", label: "Slug" },
+    { href: "/tools/keyword-density", label: "Density" },
+    { href: "/tools/sitemap-generator", label: "Sitemap" },
+    { href: "/tools/canonical-generator", label: "Canonical" },
+    { href: "/tools/robots-txt", label: "Robots.txt" },
+  ];
+
   return (
-    <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+    <header className="border-b border-neutral-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <div className="p-2 bg-blue-600 rounded-lg text-white">
-            <Sparkles size={18} />
-          </div>
-          <span>FastSEO<span className="text-blue-600">Kit</span></span>
+        <Link href="/" className="hover:opacity-90 transition-opacity">
+          <Logo />
         </Link>
-        <nav className="flex items-center gap-5 text-sm font-medium text-gray-600">
-          <Link href="/tools/serp-preview" className="hover:text-blue-600 transition-colors">SERP</Link>
-          <Link href="/tools/social-preview" className="hover:text-blue-600 transition-colors">Social Card</Link>
-          <Link href="/tools/slug-generator" className="hover:text-blue-600 transition-colors">Slug</Link>
-          <Link href="/tools/keyword-density" className="hover:text-blue-600 transition-colors">Density</Link>
-          <Link href="/tools/robots-txt" className="hover:text-blue-600 transition-colors">Robots.txt</Link>
+        <nav className="hidden md:flex items-center gap-1 text-xs font-semibold text-neutral-600">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-neutral-100/80 transition-all"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>
