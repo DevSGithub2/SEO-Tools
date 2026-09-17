@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Target, Link2 } from "lucide-react";
 
 export default function UtmBuilder() {
   const [url, setUrl] = useState("https://example.com/pricing");
-  const [source, setSource] = useState("newsletter");
-  const [medium, setMedium] = useState("email");
-  const [campaign, setCampaign] = useState("summer_sale");
-  const [term, setTerm] = useState("");
+  const [source, setSource] = useState("google");
+  const [medium, setMedium] = useState("cpc");
+  const [campaign, setCampaign] = useState("summer_launch");
+  const [term, setTerm] = useState("best-seo-tools");
   const [content, setContent] = useState("hero_cta");
   const [copied, setCopied] = useState(false);
 
@@ -38,74 +38,125 @@ export default function UtmBuilder() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="md:col-span-2">
-          <label className="block text-xs font-semibold text-gray-700 mb-1">Target Website URL *</label>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
-            placeholder="https://example.com"
-          />
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-5xl mx-auto items-stretch">
+      {/* Parameter Inputs */}
+      <div className="bg-white p-6 sm:p-7 rounded-2xl border border-neutral-200/90 shadow-xs flex flex-col justify-between space-y-4">
+        <div className="border-b border-neutral-100 pb-3 flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-bold text-neutral-900">Campaign Parameters</h2>
+            <p className="text-xs text-neutral-500">Configure UTM tracking values</p>
+          </div>
+          <span className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+            <Target size={18} />
+          </span>
         </div>
-        <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">Campaign Source (utm_source) *</label>
-          <input
-            type="text"
-            value={source}
-            onChange={(e) => setSource(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
-            placeholder="google, newsletter, twitter"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">Campaign Medium (utm_medium) *</label>
-          <input
-            type="text"
-            value={medium}
-            onChange={(e) => setMedium(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
-            placeholder="cpc, banner, email"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">Campaign Name (utm_campaign)</label>
-          <input
-            type="text"
-            value={campaign}
-            onChange={(e) => setCampaign(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
-            placeholder="spring_sale"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">Campaign Content (utm_content)</label>
-          <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
-            placeholder="logolink, textlink"
-          />
+
+        <div className="space-y-3 flex-1">
+          <div>
+            <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Website URL *</label>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+              placeholder="https://example.com"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Source (utm_source) *</label>
+              <input
+                type="text"
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+                className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+                placeholder="google, twitter"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Medium (utm_medium) *</label>
+              <input
+                type="text"
+                value={medium}
+                onChange={(e) => setMedium(e.target.value)}
+                className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+                placeholder="cpc, banner, email"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Campaign (utm_campaign)</label>
+            <input
+              type="text"
+              value={campaign}
+              onChange={(e) => setCampaign(e.target.value)}
+              className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+              placeholder="launch_promo"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Term (utm_term)</label>
+              <input
+                type="text"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+                placeholder="keyword"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1 uppercase tracking-wider">Content (utm_content)</label>
+              <input
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="w-full h-10 px-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm font-medium"
+                placeholder="cta_button"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div>
-        <label className="block text-xs font-semibold text-gray-700 mb-2">Generated Tracking URL</label>
-        <div className="flex items-center gap-2">
-          <div className="flex-1 bg-gray-50 px-4 py-2.5 border rounded-lg font-mono text-xs text-blue-700 break-all select-all">
-            {finalUrl}
+      {/* Generated Result Card */}
+      <div className="bg-white p-6 sm:p-7 rounded-2xl border border-neutral-200/90 shadow-xs flex flex-col justify-between space-y-4">
+        <div className="border-b border-neutral-100 pb-3 flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-bold text-neutral-900">Generated URL</h2>
+            <p className="text-xs text-neutral-500">Ready for Google Analytics tracking</p>
           </div>
-          <button
-            onClick={handleCopy}
-            className="px-4 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors"
-          >
-            {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
-            {copied ? "Copied" : "Copy"}
-          </button>
+          <span className="p-2 bg-neutral-100 text-neutral-700 rounded-lg">
+            <Link2 size={18} />
+          </span>
         </div>
+
+        <div className="flex-1 flex flex-col justify-center space-y-4">
+          <div className="bg-neutral-950 p-5 rounded-xl border border-neutral-800 shadow-inner">
+            <p className="text-xs text-neutral-400 font-mono mb-2 uppercase tracking-wider">Full Tracking Link:</p>
+            <div className="font-mono text-xs sm:text-sm text-emerald-400 break-all leading-relaxed select-all">
+              {finalUrl}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs text-neutral-500 bg-neutral-50 p-3 rounded-xl border border-neutral-100">
+            <div><strong>Source:</strong> {source || "—"}</div>
+            <div><strong>Medium:</strong> {medium || "—"}</div>
+            <div><strong>Campaign:</strong> {campaign || "—"}</div>
+            <div><strong>Content:</strong> {content || "—"}</div>
+          </div>
+        </div>
+
+        <button
+          onClick={handleCopy}
+          className="h-11 px-5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-600/20"
+        >
+          {copied ? <Check size={16} /> : <Copy size={16} />}
+          {copied ? "Copied to Clipboard!" : "Copy Tracking URL"}
+        </button>
       </div>
     </div>
   );

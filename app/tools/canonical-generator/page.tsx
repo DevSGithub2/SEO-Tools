@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function CanonicalPage() {
   return (
-    <div className="py-12 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto text-center mb-10">
-        <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight">Canonical Tag Generator</h1>
-        <p className="mt-2 text-sm text-neutral-600">Prevent duplicate content penalties with standardized rel=canonical tags.</p>
+    <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 space-y-8">
+      <div className="text-center max-w-xl mx-auto space-y-2">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">Canonical Tag Generator</h1>
+        <p className="text-xs sm:text-sm text-neutral-500">Prevent duplicate content penalties with standardized rel=canonical tags.</p>
       </div>
       <CanonicalGenerator />
       <AffiliateBanner />

@@ -15,32 +15,35 @@ export default function SerpPreview() {
   const descLimit = 160;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-6xl mx-auto p-4">
-      {/* Input Controls */}
-      <div className="space-y-5 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-        <h2 className="text-xl font-bold text-gray-900">SERP Data Input</h2>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-5xl mx-auto">
+      {/* Input Side */}
+      <div className="bg-white p-6 sm:p-7 rounded-2xl border border-neutral-200 shadow-xs space-y-5">
+        <div className="border-b border-neutral-100 pb-3">
+          <h2 className="text-base font-bold text-neutral-900">SERP Configuration</h2>
+          <p className="text-xs text-neutral-500">Live preview update as you edit</p>
+        </div>
 
         <div>
-          <div className="flex justify-between text-sm mb-1 font-medium text-gray-700">
+          <div className="flex justify-between text-xs font-semibold text-neutral-700 mb-1.5">
             <label>SEO Title</label>
-            <span className={title.length > titleLimit ? "text-red-500 font-semibold" : "text-gray-500"}>
-              {title.length} / {titleLimit} chars
+            <span className={title.length > titleLimit ? "text-rose-500 font-bold" : "text-neutral-400 font-mono"}>
+              {title.length} / {titleLimit}
             </span>
           </div>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 text-sm"
+            className="w-full h-11 px-3.5 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm transition-all"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter meta title..."
+            placeholder="Enter SEO title..."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Target URL</label>
+          <label className="block text-xs font-semibold text-neutral-700 mb-1.5">Target Destination URL</label>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 text-sm"
+            className="w-full h-11 px-3.5 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm transition-all"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://example.com/page"
@@ -48,15 +51,15 @@ export default function SerpPreview() {
         </div>
 
         <div>
-          <div className="flex justify-between text-sm mb-1 font-medium text-gray-700">
+          <div className="flex justify-between text-xs font-semibold text-neutral-700 mb-1.5">
             <label>Meta Description</label>
-            <span className={description.length > descLimit ? "text-red-500 font-semibold" : "text-gray-500"}>
-              {description.length} / {descLimit} chars
+            <span className={description.length > descLimit ? "text-rose-500 font-bold" : "text-neutral-400 font-mono"}>
+              {description.length} / {descLimit}
             </span>
           </div>
           <textarea
             rows={4}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 text-sm"
+            className="w-full p-3.5 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-neutral-900 text-sm transition-all"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter meta description..."
@@ -64,50 +67,58 @@ export default function SerpPreview() {
         </div>
       </div>
 
-      {/* Google Preview Display */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
-        <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Google Result Preview</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setDevice("desktop")}
-              className={`p-1.5 rounded-md text-xs flex items-center gap-1 font-medium ${
-                device === "desktop" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              <Monitor size={14} /> Desktop
-            </button>
-            <button
-              onClick={() => setDevice("mobile")}
-              className={`p-1.5 rounded-md text-xs flex items-center gap-1 font-medium ${
-                device === "mobile" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              <Smartphone size={14} /> Mobile
-            </button>
+      {/* Preview Side */}
+      <div className="bg-white p-6 sm:p-7 rounded-2xl border border-neutral-200 shadow-xs flex flex-col justify-between space-y-4">
+        <div>
+          <div className="flex items-center justify-between pb-3 border-b border-neutral-100 mb-5">
+            <div>
+              <h2 className="text-base font-bold text-neutral-900">Google Result View</h2>
+              <p className="text-xs text-neutral-500">Accurate search snippet rendering</p>
+            </div>
+            <div className="flex gap-1.5 bg-neutral-100 p-1 rounded-xl">
+              <button
+                onClick={() => setDevice("desktop")}
+                className={`px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5 font-semibold transition-all ${
+                  device === "desktop" ? "bg-white text-neutral-900 shadow-xs" : "text-neutral-500 hover:text-neutral-800"
+                }`}
+              >
+                <Monitor size={13} /> Desktop
+              </button>
+              <button
+                onClick={() => setDevice("mobile")}
+                className={`px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5 font-semibold transition-all ${
+                  device === "mobile" ? "bg-white text-neutral-900 shadow-xs" : "text-neutral-500 hover:text-neutral-800"
+                }`}
+              >
+                <Smartphone size={13} /> Mobile
+              </button>
+            </div>
+          </div>
+
+          <div className="p-5 bg-neutral-50 rounded-xl border border-neutral-100 flex items-center justify-center min-h-[220px]">
+            <div className={device === "mobile" ? "w-full max-w-sm bg-white p-4 rounded-xl shadow-xs border border-neutral-200/60" : "w-full"}>
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-5 h-5 rounded-full bg-neutral-200 flex items-center justify-center">
+                  <Globe size={11} className="text-neutral-600" />
+                </div>
+                <div className="text-xs text-neutral-600 truncate font-mono">
+                  {url || "https://example.com"}
+                </div>
+              </div>
+
+              <h3 className="text-[#1a0dab] hover:underline cursor-pointer text-lg font-medium leading-snug line-clamp-1 mb-1">
+                {title || "Default Title"}
+              </h3>
+
+              <p className="text-xs sm:text-sm text-[#4d5156] leading-relaxed line-clamp-2">
+                {description || "Meta description will preview here..."}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Live Search Card */}
-        <div className="p-4 bg-gray-50 rounded-lg border border-gray-100 flex-1">
-          <div className={device === "mobile" ? "max-w-sm mx-auto bg-white p-4 rounded-xl shadow-sm" : "max-w-xl"}>
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center">
-                <Globe size={12} className="text-gray-600" />
-              </div>
-              <div className="text-xs text-gray-600 leading-none overflow-hidden truncate">
-                {url || "https://example.com"}
-              </div>
-            </div>
-
-            <h3 className="text-[#1a0dab] hover:underline cursor-pointer text-lg font-normal leading-snug line-clamp-1 mb-1">
-              {title || "Default Search Result Title"}
-            </h3>
-
-            <p className="text-sm text-[#4d5156] leading-relaxed line-clamp-2">
-              {description || "Add a meta description to see how it looks directly in Google search snippets."}
-            </p>
-          </div>
+        <div className="text-[11px] text-neutral-400 text-center">
+          Google automatically truncates titles wider than 600px (~60 chars).
         </div>
       </div>
     </div>
