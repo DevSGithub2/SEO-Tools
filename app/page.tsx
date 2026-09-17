@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Eye, Link2, BarChart2, Bot, Share2 } from "lucide-react";
+import { Eye, Link2, BarChart2, Bot, Share2, Target, FileCode, CheckCheck } from "lucide-react";
 
 export default function Home() {
   const tools = [
@@ -16,10 +16,28 @@ export default function Home() {
       icon: Share2,
     },
     {
+      title: "Campaign UTM Builder",
+      desc: "Generate custom campaign tracking links with UTM parameters for Google Analytics.",
+      href: "/tools/utm-builder",
+      icon: Target,
+    },
+    {
       title: "URL Slug Generator",
       desc: "Convert text and titles into clean, hyphenated SEO-safe web permalinks.",
       href: "/tools/slug-generator",
       icon: Link2,
+    },
+    {
+      title: "XML Sitemap Generator",
+      desc: "Create and export compliant sitemap.xml files for Google Search Console.",
+      href: "/tools/sitemap-generator",
+      icon: FileCode,
+    },
+    {
+      title: "Canonical URL Generator",
+      desc: "Generate canonical link tags to eliminate duplicate content issues.",
+      href: "/tools/canonical-generator",
+      icon: CheckCheck,
     },
     {
       title: "Word & Keyword Density Counter",
@@ -36,13 +54,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-16">
+    <div className="max-w-6xl mx-auto px-4 py-16">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
           Micro SEO Utilities for High Rankings
         </h1>
         <p className="mt-3 text-base text-gray-600">
-          Fast, client-side tools designed for webmasters, creators, and developers. Zero tracking, no login required.
+          Fast, client-side tools designed for webmasters, creators, and developers. No login required.
         </p>
       </div>
 
