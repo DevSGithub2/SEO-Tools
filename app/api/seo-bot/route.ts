@@ -5,18 +5,18 @@ let cachedActiveModel: string | null = null;
 let lastModelCheck = 0;
 const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour
 
-const CLAUDE_STYLE_SYSTEM_PROMPT = `You are FastSEOKit Copilot. Follow Claude's signature response style strictly:
+const CLAUDE_STYLE_SYSTEM_PROMPT = `You are FastSEOKit Copilot. Follow this ultra-concise, high-signal format:
 
-1. Tone & Form:
-   - Direct, intellectually honest, neutral, and highly concise.
-   - Never start with conversational filler or preamble (do NOT say: "Sure!", "Here is what you need", "I'd be happy to help", "Certainly!"). Start directly with the answer or recommendation.
-   - No preachy conclusions or sign-offs (do NOT add "Let me know if you need anything else!").
+1. Brevity & Length:
+   - Maximum 80 to 120 words total. Never exceed 150 words.
+   - Zero fluff, conversational filler, or introductions (no "Certainly", "Here is...", "Sure!").
+   - Jump directly to the answer.
 
 2. Structure:
-   - Lead directly with the primary conclusion or action.
-   - Use succinct bullet points for recommendations or tradeoffs.
-   - If writing code or tags (HTML, robots.txt, XML sitemap, JSON-LD schema), provide clean, fenced code blocks with appropriate syntax highlighting without redundant commentary.
-   - Maximum 150-250 words per response unless the user explicitly requests an exhaustive breakdown.`;
+   - Lead with a 1-sentence verdict or key takeaway.
+   - Use tight, 2-3 item bullet points or a compact 2-4 row comparison table.
+   - No redundant explanations, repetitive examples, or verbose conclusions.
+   - If providing code, return ONLY the raw fenced code snippet without explanatory text around it.`;
 
 async function resolveActiveGroqModel(apiKey: string): Promise<string> {
   const now = Date.now();
@@ -35,7 +35,6 @@ async function resolveActiveGroqModel(apiKey: string): Promise<string> {
         .map((m: any) => m.id)
         .filter((id: string) => !id.includes("whisper") && !id.includes("guard"));
 
-      // Priority list of preferred conversational models
       const preferences = [
         "openai/gpt-oss-20b",
         "openai/gpt-oss-120b",
@@ -53,7 +52,6 @@ async function resolveActiveGroqModel(apiKey: string): Promise<string> {
         }
       }
 
-      // If none of our preferred models are matched, pick the first available text model
       if (availableIds.length > 0) {
         cachedActiveModel = availableIds[0];
         lastModelCheck = now;
@@ -61,7 +59,7 @@ async function resolveActiveGroqModel(apiKey: string): Promise<string> {
       }
     }
   } catch {
-    // Fallback to stable production model if list request fails
+    // Fallback
   }
 
   return "openai/gpt-oss-20b";
@@ -89,8 +87,8 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: activeModel,
-        temperature: 0.3,
-        max_tokens: 750,
+        temperature: 0.2,
+        max_tokens: 300,
         messages: [
           {
             role: "system",
@@ -102,7 +100,6 @@ export async function POST(req: Request) {
     });
 
     if (!response.ok) {
-      // If the cached model failed, invalidate cache and return error details
       cachedActiveModel = null;
       const errData = await response.json().catch(() => null);
       return NextResponse.json(
